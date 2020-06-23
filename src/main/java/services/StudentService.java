@@ -11,7 +11,7 @@ import java.util.List;
 
 public class StudentService {
 
-    SessionFactory sessionFactory;
+
     private GenericDao<StudentsModel> studentsModelGenericDao = new GenericDao<StudentsModel>();
 
     public void addStudent(StudentsModel studentsModel) {
@@ -33,40 +33,26 @@ public class StudentService {
         studentsModelGenericDao.update(studentsModel);
     }
     //StudentsModel studentsModel,
-    public StudentsModel findById( int id) {
-        Session session = sessionFactory.openSession();
-
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("from StudentsModel" + "where id=" + id, StudentsModel.class);
-        StudentsModel  result = (StudentsModel) query.getSingleResult();
-        transaction.commit();
-
-        if (session != null) {
-            session.close();
-        }
-
-        StudentsModel studentsModel1 = studentsModelGenericDao.findById(result, id);
-        return studentsModel1;
-       /*StudentsModel studentsModel1 = studentsModelGenericDao.findById(studentsModel,id);
-       return studentsModel1;*/
+    public StudentsModel findStudentById( StudentsModel studentsModel, int id) {
+        return studentsModelGenericDao.findById(studentsModel, id);
     }
 
-    public List<StudentsModel> findByFirstName(String firstName){
+   /* public List<StudentsModel> findByFirstName(String firstName){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from StudentsModel" + "where firstName='" +
                 firstName +"'", StudentsModel.class);
         List<StudentsModel> studentsModel= query.getResultList();
         return studentsModel ;
-    }
+    }*/
 
     public void deleteByColumn(StudentsModel studentsModel, String firstName)
     {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        int result = session.createQuery("delete from StudentsModel"  +
-                " where firstName='" + firstName + "'" ).executeUpdate();
-        transaction.commit();
+        studentsModelGenericDao.deleteByColumn(studentsModel, firstName);
+    }
+
+    public void updateByColumn(StudentsModel studentsModel, String firstName, String lastName){
+        studentsModelGenericDao.updateByColumn(studentsModel, firstName, lastName);
     }
 
 }

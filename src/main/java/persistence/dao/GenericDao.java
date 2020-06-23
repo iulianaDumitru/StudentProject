@@ -142,6 +142,31 @@ public   class GenericDao<T>  {
         transaction.commit();
     }
 
+    public void updateByColumn(T object, String firstName, String lastName)
+
+    {
+
+        //aici se face cautarea dupa firstName si modifica doar lastName la noua valoare
+
+        //pentru a fi mai generica metoda, poti declara ca parametru si numele coloanei/
+        // coloanelor pe care doresti sa le modifici
+
+// in acest caz pot aparea probleme atunci cand mai multe randuri respecta conditia data;
+// atunci vor fi modificate cu noua valoare
+
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction = session.beginTransaction();
+
+        int result = session.createQuery("update " + object.getClass().getName() +
+
+                " set lastName='" + lastName + "' where firstName='" + firstName + "'" ).executeUpdate();
+
+        transaction.commit();
+
+    }
+
+
     public SessionFactory getSessionFactory() {
         return sessionFactory;
     }

@@ -28,6 +28,10 @@ public class ClassroomsService  {
         classroomsModelGenericDao.delete(classroomsModel);
     }
 
+    public void updateClassroom(ClassroomsModel classroomsModel){
+        classroomsModelGenericDao.update(classroomsModel);
+    }
+
 
     public ClassroomsModel findById(ClassroomsModel classroomsModel, int id)
     {
@@ -35,9 +39,4 @@ public class ClassroomsService  {
        return  classroomsModel1;
     }
 
-    public List<ClassroomsModel> findByColumn(ClassroomsModel classroomsModel, String column, String value)
-    {
-        List<ClassroomsModel> classroomsModels = classroomsModelGenericDao.findByColumn(classroomsModel,column,value);
-        return  classroomsModels;
-    }
 }
