@@ -81,7 +81,7 @@ public   class GenericDao<T>  {
     {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("from" + object.getClass().getName());
+        Query query = session.createQuery("from " + object.getClass().getName());
 
         List<T>  result =  query.getResultList();
         transaction.commit();
@@ -111,7 +111,8 @@ public   class GenericDao<T>  {
     {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("from" + object.getClass().getName() + "where id=" + id + "");
+        Query query = session.createQuery("from " + object.getClass().getName() + "" +
+                " where id= " + id + "");
         T result = (T) query.getSingleResult();
         transaction.commit();
 

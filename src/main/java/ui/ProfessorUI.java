@@ -1,13 +1,14 @@
 package ui;
 
 import persistence.model.ProfessorsModel;
-import persistence.model.StudentsModel;
 import services.ProfessorService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ProfessorUI {
     private ProfessorService professorService = new ProfessorService();
+    private ProfessorsModel professorsModel = new ProfessorsModel();
     Scanner scanner = new Scanner(System.in);
 
     public void startProfessor
@@ -21,7 +22,9 @@ public class ProfessorUI {
             System.out.println("3. Update professor by specified column");
             System.out.println("4. Delete professor by id");
             System.out.println("5. Delete professor by specified column");
-            System.out.println("6. View all professors");
+            System.out.println("6. Find professor by id");
+            System.out.println("7. View all professors");
+
 
             System.out.println("0.Exit");
             System.out.println("----------------------------");
@@ -85,21 +88,39 @@ public class ProfessorUI {
                 professorsModel.setCnpProfessor(idToBeDeleted);
                 professorService.deleteProfessor(professorsModel);
 
-            }if(option == 5){
+            }
+            if (option == 5) {
                 System.out.println("Enter first name of the professor to be deleted");
                 String firstName = scanner.nextLine();
                 System.out.println("Enter last name of the professor to be deleted");
                 String lastName = scanner.nextLine();
 
-               ProfessorsModel professorsModel = new ProfessorsModel();
+                ProfessorsModel professorsModel = new ProfessorsModel();
 
                 professorsModel.setFirstName(firstName);
                 professorsModel.setLastName(lastName);
 
                 professorService.deleteProfessorByColumn(professorsModel, firstName);
 
+            }if (option == 6) {
+                System.out.println("Insert cnp to search for");
+                int cnp = scanner.nextInt();
+                scanner.nextLine();
+
+                professorsModel.setCnpProfessor(cnp);
+                System.out.println("The professor with id: " + cnp + " is " +
+                        professorService.findProfessorById(professorsModel, cnp).getFirstName() + " " +
+                        professorService.findProfessorById(professorsModel, cnp).getLastName() );
             }
 
+            if (option == 7) {
+                List<ProfessorsModel> list = professorService.viewAllProfessors(professorsModel);
+                list.forEach(professorsModel1 -> System.out.println("CNP professor: " +
+                        professorsModel1.getCnpProfessor() + "\n" +
+                        "First Name: " + professorsModel1.getFirstName() + " \n" +
+                        "Last Name: " + professorsModel1.getLastName()));
+
+            }
         }
     }
 }

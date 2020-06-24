@@ -24,4 +24,8 @@ public class ScheduleService {
      public void deleteSchedule(ScheduleModel scheduleModel){
         scheduleModelGenericDao.delete(scheduleModel);
      }
+
+     public ScheduleModel findScheduleById(ScheduleModel scheduleModel, int id){
+        return scheduleModelGenericDao.findById(scheduleModel, id);
+     }
 }

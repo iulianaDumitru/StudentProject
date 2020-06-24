@@ -4,10 +4,12 @@ import persistence.model.ClassroomsModel;
 import persistence.model.CoursesModel;
 import services.ClassroomsService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ClassroomUI {
     private ClassroomsService classroomsService = new ClassroomsService();
+    ClassroomsModel classroomsModel = new ClassroomsModel();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -22,6 +24,7 @@ public class ClassroomUI {
             System.out.println("2. Update classroom by id");
             System.out.println("3. Delete classroom by id");
             System.out.println("4. View all classrooms");
+            System.out.println("5. Search classroom by id");
 
             System.out.println("0.Exit");
             System.out.println("----------------------------");
@@ -57,6 +60,19 @@ public class ClassroomUI {
                 ClassroomsModel classroomsModel = new ClassroomsModel();
                 classroomsModel.setIdClassroom(idToBeDeleted);
                 classroomsService.deleteClassroom(classroomsModel);
+            }if(option ==4){
+                List<ClassroomsModel> list = classroomsService.viewAllClassrooms(classroomsModel);
+                list.forEach(coursesModel1 -> System.out.println("Id classroom: "+ classroomsModel.getIdClassroom()
+                        + " "+ classroomsModel.getName()));
+            }if(option == 5){
+                System.out.println("Insert id to search for");
+                int idClassroom = scanner.nextInt();
+                scanner.nextLine();
+
+                ClassroomsModel classroomsModel1 = new ClassroomsModel();
+                classroomsModel1.setIdClassroom(idClassroom);
+                System.out.println("The classroom with id: "+ idClassroom+ " is " +
+                        classroomsService.findById(classroomsModel1, idClassroom).getName());
             }
         }
     }

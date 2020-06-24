@@ -5,6 +5,7 @@ package ui;
 import persistence.model.StudentsModel;
 import services.StudentService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentUI {
@@ -102,27 +103,28 @@ public class StudentUI {
             }
 
             if (option == 6) {
-               /* List<StudentsModel> list = studentService.viewAllStudents(studentsModel);
-                list.forEach(studentsModel1 -> System.out.println(studentsModel1.getFirstName()+
-                        " "+ studentsModel1.getLastName()));
-                for (StudentsModel studentsModel:list
-                     ) {
-                    System.out.println(studentsModel.getCnpStudent() + " " + studentsModel.getFirstName()+
-                            " "+ studentsModel.getLastName());*/
-
+                List<StudentsModel> list = studentService.viewAllStudents(studentsModel);
+                for (StudentsModel studentsModel : list) {
+                    System.out.println("CNP student: " + studentsModel.getCnpStudent() + "\n" +
+                            "First Name: " + studentsModel.getFirstName() + " \n" +
+                            "Last Name: " + studentsModel.getLastName());
+                }
             }
             if (option == 7) {
                 System.out.println("Insert cnp to search for");
                 int cnp = scanner.nextInt();
                 scanner.nextLine();
 
-                StudentsModel studentsModel = new StudentsModel();
                 studentsModel.setCnpStudent(cnp);
-                studentService.findStudentById(studentsModel, cnp);
+                System.out.println("The student with id: "+ cnp+ " is " +
+                        studentService.findStudentById(studentsModel, cnp).getFirstName() + " "+
+                        studentService.findStudentById(studentsModel, cnp).getLastName());
+
             }
         }
     }
 }
+
 
 
 
