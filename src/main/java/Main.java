@@ -1,10 +1,4 @@
-import persistence.model.*;
-
-import services.*;
 import ui.ManagementUI;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 

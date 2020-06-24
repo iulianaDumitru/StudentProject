@@ -18,12 +18,10 @@ public class ProfessorUI {
             System.out.println("Professors");
             System.out.println("----------------------------");
             System.out.println("1. Add professor");
-            System.out.println("2. Update professor by id");
-            System.out.println("3. Update professor by specified column");
-            System.out.println("4. Delete professor by id");
-            System.out.println("5. Delete professor by specified column");
-            System.out.println("6. Find professor by id");
-            System.out.println("7. View all professors");
+            System.out.println("2. Update professor");
+            System.out.println("3. Delete professor");
+            System.out.println("4. Find professor by id");
+            System.out.println("5. View all professors");
 
 
             System.out.println("0.Exit");
@@ -33,94 +31,143 @@ public class ProfessorUI {
             scanner.nextLine();
 
             if (option == 1) {
-                System.out.println("Insert first name:");
-                String firstName = scanner.nextLine();
-                System.out.println("Insert last name: ");
-                String lastName = scanner.nextLine();
 
-                ProfessorsModel professorsModel = new ProfessorsModel();
-                professorsModel.setFirstName(firstName);
-                professorsModel.setLastName(lastName);
-
-
-                professorService.addProfessor(professorsModel);
+                addProfessorUI();
 
             }
             if (option == 2) {
-                System.out.println("Insert new value for first name");
-                String firstName = scanner.nextLine();
-
-                System.out.println("Insert new value for last name");
-                String lastName = scanner.nextLine();
-
-                System.out.println("Insert cnp to search for update");
-                int cnp = scanner.nextInt();
+                System.out.println("1. Update by id");
+                System.out.println("2. Update by column");
+                System.out.println("Enter your option:");
+                int update = scanner.nextInt();
                 scanner.nextLine();
 
-                ProfessorsModel professorsModel = new ProfessorsModel();
-                professorsModel.setFirstName(firstName);
-                professorsModel.setLastName(lastName);
-                professorsModel.setCnpProfessor(cnp);
+                if (update == 1) {
+                    updateProfessorByIdUI();
+                }
+                if (update == 2) {
+                    updateProfessorByColumn();
+                }
 
-                professorService.updateProfessor(professorsModel);
             }
             if (option == 3) {
-                System.out.println("Enter first name to search for a row");
-                String firstName = scanner.nextLine();
+                System.out.println("1. Delete by id");
+                System.out.println("2. Delete by column");
+                System.out.println("Enter your option:");
+                int delete = scanner.nextInt();
+                scanner.nextLine();
 
-                System.out.println("Enter last name to be updated");
-                String lastName = scanner.nextLine();
-
-                ProfessorsModel professorsModel = new ProfessorsModel();
-
-                professorsModel.setFirstName(firstName);
-                professorsModel.setLastName(lastName);
-
-                professorService.updateProfessorByColumn(professorsModel, firstName, lastName);
+                if (delete == 1) {
+                    deleteProfessorByIdUI();                }
+                if (delete == 2) {
+                    deleteProfessorByColumnUI();
+                }
             }
             if (option == 4) {
 
-                System.out.println("Enter id to delete");
-                int idToBeDeleted = scanner.nextInt();
-                scanner.nextLine();
-
-                ProfessorsModel professorsModel = new ProfessorsModel();
-                professorsModel.setCnpProfessor(idToBeDeleted);
-                professorService.deleteProfessor(professorsModel);
+                findProfessorByIdUI();
 
             }
-            if (option == 5) {
-                System.out.println("Enter first name of the professor to be deleted");
-                String firstName = scanner.nextLine();
-                System.out.println("Enter last name of the professor to be deleted");
-                String lastName = scanner.nextLine();
 
-                ProfessorsModel professorsModel = new ProfessorsModel();
-
-                professorsModel.setFirstName(firstName);
-                professorsModel.setLastName(lastName);
-
-                professorService.deleteProfessorByColumn(professorsModel, firstName);
-
-            }if (option == 6) {
-                System.out.println("Insert cnp to search for");
-                int cnp = scanner.nextInt();
-                scanner.nextLine();
-
-                professorsModel.setCnpProfessor(cnp);
-                System.out.println("The professor with id: " + cnp + " is " +
-                        professorService.findProfessorById(professorsModel, cnp).getFirstName() + " " +
-                        professorService.findProfessorById(professorsModel, cnp).getLastName() );
+            }if (option == 5) {
+                viewAllProfessorsUI();
             }
 
-            if (option == 7) {
-                List<ProfessorsModel> list = professorService.viewAllProfessors(professorsModel);
-                list.forEach(professorsModel1 -> System.out.println("CNP professor: " +
-                        professorsModel1.getCnpProfessor() + "\n" +
-                        "First Name: " + professorsModel1.getFirstName() + " \n" +
-                        "Last Name: " + professorsModel1.getLastName()));
 
-            }
         }
+
+
+
+
+    private void viewAllProfessorsUI() {
+
+        List<ProfessorsModel> list = professorService.viewAllProfessors(professorsModel);
+        list.forEach(professorsModel1 -> System.out.println("CNP professor: " +
+                professorsModel1.getCnpProfessor() + "\n" +
+                "First Name: " + professorsModel1.getFirstName() + " \n" +
+                "Last Name: " + professorsModel1.getLastName()));
+    }
+
+    private void findProfessorByIdUI() {
+        System.out.println("Insert cnp to search for");
+        int cnp = scanner.nextInt();
+        scanner.nextLine();
+
+        professorsModel.setCnpProfessor(cnp);
+        System.out.println("The professor with id: " + cnp + " is " +
+                professorService.findProfessorById(professorsModel, cnp).getFirstName() + " " +
+                professorService.findProfessorById(professorsModel, cnp).getLastName() );
+    }
+
+    private void deleteProfessorByColumnUI() {
+        System.out.println("Enter first name of the professor to be deleted");
+        String firstName = scanner.nextLine();
+        System.out.println("Enter last name of the professor to be deleted");
+        String lastName = scanner.nextLine();
+
+        ProfessorsModel professorsModel = new ProfessorsModel();
+
+        professorsModel.setFirstName(firstName);
+        professorsModel.setLastName(lastName);
+
+        professorService.deleteProfessorByColumn(professorsModel, firstName);
+    }
+
+    private void deleteProfessorByIdUI() {
+        System.out.println("Enter id to delete");
+        int idToBeDeleted = scanner.nextInt();
+        scanner.nextLine();
+
+        ProfessorsModel professorsModel = new ProfessorsModel();
+        professorsModel.setCnpProfessor(idToBeDeleted);
+        professorService.deleteProfessor(professorsModel);
+    }
+
+    private void updateProfessorByIdUI() {
+        System.out.println("Insert new value for first name");
+        String firstName = scanner.nextLine();
+
+        System.out.println("Insert new value for last name");
+        String lastName = scanner.nextLine();
+
+        System.out.println("Insert cnp to search for update");
+        int cnp = scanner.nextInt();
+        scanner.nextLine();
+
+        ProfessorsModel professorsModel = new ProfessorsModel();
+        professorsModel.setFirstName(firstName);
+        professorsModel.setLastName(lastName);
+        professorsModel.setCnpProfessor(cnp);
+
+        professorService.updateProfessor(professorsModel);
+    }
+
+    private void addProfessorUI() {
+        System.out.println("Insert first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Insert last name: ");
+        String lastName = scanner.nextLine();
+
+        ProfessorsModel professorsModel = new ProfessorsModel();
+        professorsModel.setFirstName(firstName);
+        professorsModel.setLastName(lastName);
+
+
+        professorService.addProfessor(professorsModel);
+    }
+
+    private void updateProfessorByColumn(){
+        System.out.println("Enter first name to search for a row");
+        String firstName = scanner.nextLine();
+
+        System.out.println("Enter last name to be updated");
+        String lastName = scanner.nextLine();
+
+        ProfessorsModel professorsModel = new ProfessorsModel();
+
+        professorsModel.setFirstName(firstName);
+        professorsModel.setLastName(lastName);
+
+        professorService.updateProfessorByColumn(professorsModel, firstName, lastName);
     }
 }
