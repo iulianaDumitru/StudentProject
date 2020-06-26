@@ -10,6 +10,7 @@ import java.util.List;
 public class ScheduleModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private int idSchedule;
     private Date date;
     private String startingHour;
