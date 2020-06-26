@@ -1,6 +1,7 @@
 package ui;
 
 
+import persistence.model.ClassroomsModel;
 import persistence.model.CoursesModel;
 import persistence.model.ScheduleModel;
 import services.CoursesService;
@@ -18,6 +19,7 @@ public class ScheduleUI {
     ScheduleModel scheduleModel = new ScheduleModel();
     CoursesModel coursesModel = new CoursesModel();
     CoursesService coursesService = new CoursesService();
+    ClassroomsModel classroomsModel = new ClassroomsModel();
     Scanner scanner = new Scanner(System.in);
 
 
@@ -93,10 +95,18 @@ public class ScheduleUI {
         System.out.println("Insert starting hour");
         String endingHour = scanner.nextLine();
 
+        System.out.println("Insert id for Classroom");
+        int idClassroom = scanner.nextInt();
+        scanner.nextLine();
+
+
         ScheduleModel scheduleModel = new ScheduleModel();
         scheduleModel.setDate(sqlStartDate);
         scheduleModel.setStartingHour(startingHour);
         scheduleModel.setEndingHour(endingHour);
+        scheduleModel.setClassRoomsModel(classroomsModel);
+        classroomsModel.setIdClassroom(idClassroom);
+
 
         scheduleService.addSchedule(scheduleModel);
 
@@ -126,11 +136,17 @@ public class ScheduleUI {
         int idSchedule = scanner.nextInt();
         scanner.nextLine();
 
+        System.out.println("Insert id for Classroom");
+        int idClassroom = scanner.nextInt();
+        scanner.nextLine();
+
         ScheduleModel scheduleModel1 = new ScheduleModel();
         scheduleModel1.setDate(sqlStartDate);
         scheduleModel1.setStartingHour(startingHour);
         scheduleModel1.setEndingHour(endingHour);
         scheduleModel1.setIdSchedule(idSchedule);
+        scheduleModel1.setClassRoomsModel(classroomsModel);
+        classroomsModel.setIdClassroom(idClassroom);
 
         scheduleService.updateSchedule(scheduleModel1);
 
