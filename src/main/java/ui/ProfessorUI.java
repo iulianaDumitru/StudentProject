@@ -58,7 +58,8 @@ public class ProfessorUI {
                 scanner.nextLine();
 
                 if (delete == 1) {
-                    deleteProfessorByIdUI();                }
+                    deleteProfessorByIdUI();
+                }
                 if (delete == 2) {
                     deleteProfessorByColumnUI();
                 }
@@ -69,23 +70,26 @@ public class ProfessorUI {
 
             }
 
-            }if (option == 5) {
+            if (option == 5) {
                 viewAllProfessorsUI();
             }
 
-
         }
-
-
+    }
 
 
     private void viewAllProfessorsUI() {
 
         List<ProfessorsModel> list = professorService.viewAllProfessors(professorsModel);
-        list.forEach(professorsModel1 -> System.out.println("CNP professor: " +
-                professorsModel1.getCnpProfessor() + "\n" +
-                "First Name: " + professorsModel1.getFirstName() + " \n" +
-                "Last Name: " + professorsModel1.getLastName()));
+
+        for (ProfessorsModel professorModel : list) {
+
+            System.out.println("IdProfessor: " + professorModel.getCnpProfessor() +
+                    " First name: " + professorModel.getFirstName() +
+                    " Last name: " + professorModel.getLastName());
+
+        }
+
     }
 
     private void findProfessorByIdUI() {
@@ -96,7 +100,7 @@ public class ProfessorUI {
         professorsModel.setCnpProfessor(cnp);
         System.out.println("The professor with id: " + cnp + " is " +
                 professorService.findProfessorById(professorsModel, cnp).getFirstName() + " " +
-                professorService.findProfessorById(professorsModel, cnp).getLastName() );
+                professorService.findProfessorById(professorsModel, cnp).getLastName());
     }
 
     private void deleteProfessorByColumnUI() {
@@ -156,7 +160,7 @@ public class ProfessorUI {
         professorService.addProfessor(professorsModel);
     }
 
-    private void updateProfessorByColumn(){
+    private void updateProfessorByColumn() {
         System.out.println("Enter first name to search for a row");
         String firstName = scanner.nextLine();
 

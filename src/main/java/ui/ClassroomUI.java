@@ -70,8 +70,11 @@ public class ClassroomUI {
     private void viewAllClassroomsUI() {
 
         List<ClassroomsModel> list = classroomsService.viewAllClassrooms(classroomsModel);
-        list.forEach(coursesModel1 -> System.out.println("Id classroom: " + classroomsModel.getIdClassroom()
-                + " " + classroomsModel.getName()));
+
+        for (ClassroomsModel classroomsModel:list) {
+            System.out.println("Id classroom: "+ classroomsModel.getIdClassroom() +
+                    " Name: " + classroomsModel.getName());
+        }
     }
 
     private void deleteClasssromById() {

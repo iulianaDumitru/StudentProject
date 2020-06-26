@@ -37,14 +37,6 @@ public class StudentService {
         return studentsModelGenericDao.findById(studentsModel, id);
     }
 
-   /* public List<StudentsModel> findByFirstName(String firstName){
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("from StudentsModel" + "where firstName='" +
-                firstName +"'", StudentsModel.class);
-        List<StudentsModel> studentsModel= query.getResultList();
-        return studentsModel ;
-    }*/
 
     public void deleteByColumn(StudentsModel studentsModel, String firstName)
     {

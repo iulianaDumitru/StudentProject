@@ -78,9 +78,9 @@ public class StudentUI {
 
         List<StudentsModel> list = studentService.viewAllStudents(studentsModel);
         for (StudentsModel studentsModel : list) {
-            System.out.println("CNP student: " + studentsModel.getCnpStudent() + "\n" +
-                    "First Name: " + studentsModel.getFirstName() + " \n" +
-                    "Last Name: " + studentsModel.getLastName());
+            System.out.println("CNP student: " + studentsModel.getCnpStudent()  +
+                    " First Name: " + studentsModel.getFirstName() +
+                    " Last Name: " + studentsModel.getLastName());
         }
     }
 
