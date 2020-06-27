@@ -7,16 +7,15 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import persistence.model.*;
 
-
-
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Properties;
 
-public   class GenericDao<T>  {
+public class GenericDao<T> {
 
-    private SessionFactory sessionFactory;
+
     private static GenericDao genericDao;
+    private SessionFactory sessionFactory;
 
     public GenericDao() {
         Configuration configuration = new Configuration();
@@ -33,7 +32,6 @@ public   class GenericDao<T>  {
         configuration.setProperties(properties);
 
 
-
         configuration.addAnnotatedClass(ClassroomsModel.class);
         configuration.addAnnotatedClass(ScheduleModel.class);
         configuration.addAnnotatedClass(CoursesModel.class);
@@ -44,7 +42,7 @@ public   class GenericDao<T>  {
         sessionFactory = configuration.buildSessionFactory();
     }
 
-   public static GenericDao getInstance() {
+    public static GenericDao getInstance() {
         if (genericDao == null) {
             GenericDao genericDao = new GenericDao();
         }
@@ -52,63 +50,54 @@ public   class GenericDao<T>  {
     }
 
 
-    public void add(T object)
-    {
+    public void add(T object) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(object);
         transaction.commit();
-        if(session != null)
-        {
+        if (session != null) {
             session.close();
         }
     }
 
-    public void update(T object)
-    {
+    public void update(T object) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.update(object);
         transaction.commit();
 
-        if(session !=  null)
-        {
+        if (session != null) {
             session.close();
         }
     }
 
-    public List<T> getAll(T object)
-    {
+    public List<T> getAll(T object) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from " + object.getClass().getName());
 
-        List<T>  result =  query.getResultList();
+        List<T> result = query.getResultList();
         transaction.commit();
 
-        if(session != null)
-        {
+        if (session != null) {
             session.close();
         }
 
         return result;
     }
 
-    public void delete(T object)
-    {
+    public void delete(T object) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.delete(object);
         transaction.commit();
 
-        if(session != null)
-        {
+        if (session != null) {
             session.close();
         }
     }
 
-    public T findById(T object, int id)
-    {
+    public T findById(T object, int id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from " + object.getClass().getName() + "" +
@@ -116,36 +105,31 @@ public   class GenericDao<T>  {
         T result = (T) query.getSingleResult();
         transaction.commit();
 
-        if(session != null)
-        {
+        if (session != null) {
             session.close();
         }
-        return  result;
+        return result;
     }
 
-    public List<T> findByColumn(T object, String column, String value)
-    {
+    public List<T> findByColumn(T object, String column, String value) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Query query = session.createQuery("from "+ object.getClass().getName() +
+        Query query = session.createQuery("from " + object.getClass().getName() +
                 "where" + column + " = '" + value + "'");
         List<T> result = query.getResultList();
         return result;
     }
 
-    public void deleteByColumn(T object, String firstName)
-    {
+    public void deleteByColumn(T object, String firstName) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         int result = session.createQuery("delete from " + object.getClass().getName() +
-                " where firstName='" + firstName + "'" ).executeUpdate();
+                " where firstName='" + firstName + "'").executeUpdate();
         transaction.commit();
     }
 
-    public void updateByColumn(T object, String firstName, String lastName)
-
-    {
+    public void updateByColumn(T object, String firstName, String lastName) {
 
         Session session = sessionFactory.openSession();
 
@@ -153,7 +137,7 @@ public   class GenericDao<T>  {
 
         int result = session.createQuery("update " + object.getClass().getName() +
 
-                " set lastName='" + lastName + "' where firstName='" + firstName + "'" ).executeUpdate();
+                " set lastName='" + lastName + "' where firstName='" + firstName + "'").executeUpdate();
 
         transaction.commit();
 
