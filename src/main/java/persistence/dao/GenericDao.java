@@ -17,6 +17,7 @@ public class GenericDao<T> {
     private static GenericDao genericDao;
     private SessionFactory sessionFactory;
 
+
     public GenericDao() {
         Configuration configuration = new Configuration();
         Properties properties = new Properties();
@@ -24,7 +25,7 @@ public class GenericDao<T> {
         properties.put(Environment.URL,
                 "jdbc:mysql://localhost:3306/studentproject?serverTimezone=UTC");
         properties.put(Environment.USER, "root");
-        properties.put(Environment.PASS, "parolamysql@1990");
+        properties.put(Environment.PASS, "password");
         properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
         properties.put(Environment.SHOW_SQL, "true");//
         properties.put(Environment.HBM2DDL_AUTO, "update");
