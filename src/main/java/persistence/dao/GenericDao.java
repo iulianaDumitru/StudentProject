@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
-import persistence.model.*;
+import persistence.dto.*;
 
 import javax.persistence.Query;
 import java.util.List;
