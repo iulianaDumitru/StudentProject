@@ -1,7 +1,7 @@
 package bussines;
 
-import persistence.dao.GenericDao;
-import persistence.dto.ScheduleModel;
+import model.dao.GenericDao;
+import model.dto.ScheduleModel;
 
 import java.util.List;
 

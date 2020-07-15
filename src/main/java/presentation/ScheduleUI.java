@@ -1,9 +1,9 @@
 package presentation;
 
 
-import persistence.dto.ClassroomsModel;
-import persistence.dto.CoursesModel;
-import persistence.dto.ScheduleModel;
+import model.dto.ClassroomsModel;
+import model.dto.CoursesModel;
+import model.dto.ScheduleModel;
 import bussines.CoursesService;
 import bussines.ScheduleService;
 

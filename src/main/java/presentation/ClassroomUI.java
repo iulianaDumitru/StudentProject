@@ -1,6 +1,6 @@
 package presentation;
 
-import persistence.dto.ClassroomsModel;
+import model.dto.ClassroomsModel;
 import bussines.ClassroomsService;
 
 import java.util.List;

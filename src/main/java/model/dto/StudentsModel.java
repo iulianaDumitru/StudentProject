@@ -1,11 +1,11 @@
-package persistence.dto;
+package model.dto;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "students")
-public class StudentsModel {
+public class    StudentsModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +24,10 @@ public class StudentsModel {
                      @JoinColumn(name = "idCourse", nullable = false, updatable = false)
     })
     private List<CoursesModel> coursesModelList;
+
+    @ManyToOne
+    @JoinColumn(name = "idsubgroupe")
+    private SubgroupeModel subgroupeModel;
 
     public int getCnpStudent() {
         return cnpStudent;
@@ -51,6 +55,20 @@ public class StudentsModel {
 
     public List<CoursesModel> getCoursesModelList() {
         return coursesModelList;
+    }
+
+    public SubgroupeModel getSubgroupeModel() {
+        return subgroupeModel;
+    }
+
+    public void setSubgroupeModel(SubgroupeModel subgroupeModel) {
+        this.subgroupeModel = subgroupeModel;
+    }
+
+    public String toString()
+    {
+        return "Student " + firstName + " "+ lastName+ " belongs to subgroupe "+ subgroupeModel.getIdsubgroupe();
+
     }
 
     public void setCoursesModelList(List<CoursesModel> coursesModelList) {

@@ -1,4 +1,4 @@
-package persistence.dto;
+package model.dto;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,11 +16,14 @@ public class CoursesModel {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "coursesList")
     private List<ScheduleModel> scheduleModelList;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "coursesModelList" )
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "coursesModelList")
     private List<StudentsModel> studentsModelList;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy =  "coursesProfessorsList")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "coursesProfessorsList")
     List<ProfessorsModel> professorsModels;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
+    List<GroupeModel> groupeModels;
 
     public int getIdCourse() {
         return idCourse;
@@ -68,5 +71,10 @@ public class CoursesModel {
 
     public void setProfessorsModels(List<ProfessorsModel> professorsModels) {
         this.professorsModels = professorsModels;
+    }
+
+    public String toString()
+    {
+        return name + " "+ description;
     }
 }

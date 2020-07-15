@@ -1,9 +1,9 @@
-package persistence.dao;
+package model.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
-import persistence.dto.*;
+import model.dto.*;
 
 import java.util.Properties;
 
@@ -19,7 +19,7 @@ public class GenericDaoSingleton {
         properties.put(Environment.URL,
                 "jdbc:mysql://localhost:3306/studentproject?serverTimezone=UTC");
         properties.put(Environment.USER, "root");
-        properties.put(Environment.PASS, "parolamysql@1990");
+        properties.put(Environment.PASS, "parola");
         properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
         properties.put(Environment.SHOW_SQL, "true");//
         properties.put(Environment.HBM2DDL_AUTO, "update");
@@ -32,6 +32,8 @@ public class GenericDaoSingleton {
         configuration.addAnnotatedClass(CoursesModel.class);
         configuration.addAnnotatedClass(ProfessorsModel.class);
         configuration.addAnnotatedClass(StudentsModel.class);
+        configuration.addAnnotatedClass(GroupeModel.class);
+        configuration.addAnnotatedClass(SubgroupeModel.class);
 
 
         sessionFactory = configuration.buildSessionFactory();

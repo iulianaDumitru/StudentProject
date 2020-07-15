@@ -1,8 +1,8 @@
 package presentation;
 
-import persistence.dto.CoursesModel;
-import persistence.dto.ProfessorsModel;
-import persistence.dto.StudentsModel;
+import model.dto.CoursesModel;
+import model.dto.ProfessorsModel;
+import model.dto.StudentsModel;
 import bussines.CoursesService;
 import bussines.ProfessorService;
 import bussines.StudentService;
@@ -33,6 +33,7 @@ public class CoursesUI {
             System.out.println("5. Assign course to a student");
             System.out.println("6. Assign course to a professor");
             System.out.println("7. Find a course by id");
+            //System.out.println("8. See all courses of a professor");
 
             System.out.println("0.Exit");
             System.out.println("----------------------------");
@@ -61,9 +62,27 @@ public class CoursesUI {
 
             if (option == 7) {
                 searchById();
-            }
+            }/*if(option == 8){
+                seeCoursesForProfessor();
+            }*/
         }
     }
+
+    /*private void seeCoursesForProfessor() {
+        System.out.println("Enter id of the professor:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        ProfessorsModel professorsModel = new ProfessorsModel();
+        professorsModel.setCnpProfessor(id);
+        System.out.println("Professor "+ professorService.findProfessorById(professorsModel, id).getFirstName()+
+                " teaches: ");
+        List<CoursesModel> coursesProfessor =
+                professorService.findProfessorById(professorsModel, id).getCoursesProfessorsList();
+
+        professorsModel.setCoursesProfessorsList(coursesProfessor);
+
+        coursesProfessor.forEach(coursesModel1 -> System.out.println(coursesModel1.getName()));
+    }*/
 
     private void assignCourseToProfessor() {
         System.out.println("Insert id of the course to be assigned:");
@@ -77,7 +96,7 @@ public class CoursesUI {
         List<CoursesModel> courses = new ArrayList<>();
         courses.add(coursesModel);
 
-        System.out.println("Insert the id of the professor to be assigned");
+        System.out.println("\n Insert the id of the professor to be assigned");
         int idProfessor = scanner.nextInt();
         scanner.nextLine();
 
@@ -93,6 +112,12 @@ public class CoursesUI {
         professorsModel.setCoursesProfessorsList(courses);
         coursesService.updateCourse(coursesModel);
         professorService.updateProfessor(professorsModel);
+
+        System.out.println("Professor "+ professorsModel.getFirstName() + " is teaching:" );
+        courses.forEach(coursesModel1 -> System.out.println("Id course: "+coursesModel1.getIdCourse() + " "
+        +"Name course: "+ coursesModel1.getName()));
+
+
     }
 
     private void assignCourseToStudent() {
@@ -124,6 +149,7 @@ public class CoursesUI {
         studentsModel.setCoursesModelList(courses);
         coursesService.updateCourse(coursesModel);
         studentService.updateStudent(studentsModel);
+
     }
 
     private void addCourse() {
@@ -173,6 +199,7 @@ public class CoursesUI {
     }
 
     private void searchById() {
+        viewAllCourses();
         System.out.println("Insert id to search for");
         int id = scanner.nextInt();
         scanner.nextLine();

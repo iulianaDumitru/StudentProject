@@ -1,7 +1,7 @@
 package bussines;
 
-import persistence.dao.GenericDao;
-import persistence.dto.CoursesModel;
+import model.dao.GenericDao;
+import model.dto.CoursesModel;
 
 import java.util.List;
 

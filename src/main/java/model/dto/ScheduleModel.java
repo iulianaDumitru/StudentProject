@@ -1,4 +1,4 @@
-package persistence.dto;
+package model.dto;
 
 import javax.persistence.*;
 import java.sql.Date;

@@ -1,4 +1,4 @@
-package persistence.dto;
+package model.dto;
 
 import javax.persistence.*;
 import java.util.List;
@@ -38,5 +38,10 @@ public class ClassroomsModel {
 
     public void setSchedules(List<ScheduleModel> schedules) {
         this.schedules = schedules;
+    }
+
+    public String toString()
+    {
+        return name;
     }
 }

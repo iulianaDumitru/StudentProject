@@ -2,9 +2,14 @@
 package presentation;
 
 
-import persistence.dto.StudentsModel;
+import bussines.CoursesService;
+import bussines.SubgroupeService;
+import model.dto.CoursesModel;
+import model.dto.StudentsModel;
 import bussines.StudentService;
+import model.dto.SubgroupeModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,6 +17,9 @@ public class StudentUI {
 
     private StudentService studentService = new StudentService();
     private StudentsModel studentsModel = new StudentsModel();
+    CoursesModel coursesModel = new CoursesModel();
+    CoursesService coursesService = new CoursesService();
+    SubgroupeService subgroupeService = new SubgroupeService();
     Scanner scanner = new Scanner(System.in);
 
     public void startStudent() {
@@ -24,6 +32,8 @@ public class StudentUI {
             System.out.println("3. Delete student");
             System.out.println("4. View all students");
             System.out.println("5. Find student by id");
+            System.out.println("6. View student's courses");
+            System.out.println("7. Assign student to a subgroupe");
             System.out.println("0.Exit");
             System.out.println("----------------------------");
             System.out.println("Please insert your option:");
@@ -70,9 +80,42 @@ public class StudentUI {
             if (option == 5) {
                 findByIdUI();
 
+            }if(option == 7)
+            {
+                assingStudentToSubgroupe();
             }
         }
     }
+
+    private void assingStudentToSubgroupe() {
+        System.out.println("Enter the id of the student to be assigned");
+        int idStudent = scanner.nextInt();
+        scanner.nextLine();
+        StudentsModel studentsModel = new StudentsModel();
+        studentsModel.setCnpStudent(idStudent);
+        studentsModel.setFirstName(studentService.findStudentById(studentsModel,idStudent).getFirstName());
+        studentsModel.setLastName(studentService.findStudentById(studentsModel,idStudent).getLastName());
+
+        List<StudentsModel> students = new ArrayList<>();
+        students.add(studentsModel);
+
+        System.out.println("Enter the subgroupe id:");
+        int idSubgroupe = scanner.nextInt();
+        scanner.nextLine();
+
+        SubgroupeModel subgroupeModel = new SubgroupeModel();
+        subgroupeModel.setIdsubgroupe(idSubgroupe);
+        subgroupeModel.setName(subgroupeService.findById(subgroupeModel, idSubgroupe).getName());
+
+        studentsModel.setSubgroupeModel(subgroupeModel);
+        subgroupeModel.setStudents(students);
+
+        studentService.updateStudent(studentsModel);
+        subgroupeService.update(subgroupeModel);
+
+        System.out.println(studentsModel.toString());
+    }
+
 
     private void viewAllStudentsUI() {
 

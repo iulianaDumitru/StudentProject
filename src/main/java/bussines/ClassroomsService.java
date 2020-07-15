@@ -1,8 +1,8 @@
 package bussines;
 
 import org.hibernate.SessionFactory;
-import persistence.dto.ClassroomsModel;
-import persistence.dao.GenericDao;
+import model.dto.ClassroomsModel;
+import model.dao.GenericDao;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package persistence.dto;
+package model.dto;
 
 import javax.persistence.*;
 import java.util.List;
@@ -56,5 +56,10 @@ public class ProfessorsModel {
 
     public void setCoursesProfessorsList(List<CoursesModel> coursesProfessorsList) {
         this.coursesProfessorsList = coursesProfessorsList;
+    }
+
+    public String toString()
+    {
+        return firstName + " "+ lastName;
     }
 }

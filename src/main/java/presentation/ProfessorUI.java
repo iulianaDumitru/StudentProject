@@ -1,6 +1,6 @@
 package presentation;
 
-import persistence.dto.ProfessorsModel;
+import model.dto.ProfessorsModel;
 import bussines.ProfessorService;
 
 import java.util.List;
@@ -22,6 +22,9 @@ public class ProfessorUI {
             System.out.println("3. Delete professor");
             System.out.println("4. Find professor by id");
             System.out.println("5. View all professors");
+            //System.out.println("6. View courses for professor");
+
+
 
 
             System.out.println("0.Exit");
@@ -73,9 +76,29 @@ public class ProfessorUI {
             if (option == 5) {
                 viewAllProfessorsUI();
             }
+            /*if(option == 6)
+            {
+                viewCoursesForProfessor();
+            }*/
 
         }
     }
+
+    /*private void viewCoursesForProfessor()
+    {
+        ProfessorsModel professorsModel = new ProfessorsModel();
+        System.out.println("Insert id of the professor");
+        int idProfessor = scanner.nextInt();
+        scanner.nextLine();
+
+        ProfessorsModel professorsModel1 =professorService.findProfessorById(professorsModel, idProfessor);
+        List<CoursesModel> coursesModel = professorsModel.getCoursesProfessorsList();
+
+        for (CoursesModel model : coursesModel) {
+            System.out.println(model.getName());
+        }
+
+    }*/
 
 
     private void viewAllProfessorsUI() {
@@ -155,6 +178,9 @@ public class ProfessorUI {
         ProfessorsModel professorsModel = new ProfessorsModel();
         professorsModel.setFirstName(firstName);
         professorsModel.setLastName(lastName);
+
+        System.out.println("Adding professor");
+        System.out.println(professorsModel.toString());
 
 
         professorService.addProfessor(professorsModel);

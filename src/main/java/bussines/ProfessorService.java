@@ -1,7 +1,7 @@
 package bussines;
 
-import persistence.dao.GenericDao;
-import persistence.dto.ProfessorsModel;
+import model.dao.GenericDao;
+import model.dto.ProfessorsModel;
 
 import java.util.List;
 
